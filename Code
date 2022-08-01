@@ -1,0 +1,239 @@
+sellerlst=[]
+buyerlst=[]
+brokerlst=[]
+adminlst=[]
+reglst=[]
+paylst=[]
+class seller:
+    def __init__(self):
+        self.id=None
+        self.pwd=None
+        self.name=None
+        self.income=0
+        self.setdetails()
+        
+    def addincome(self,a):
+        self.income+=a
+    def setdetails(self):
+        self.id=str(input())
+        self.pwd=str(input())
+        self.name=str(input())
+        self.income=0
+    def getdetails(self):
+        print(self.id)
+        print(self.pwd)
+        print(self.name)
+        print(self.income)
+class buyer:
+    def __init__(self):
+        self.id=None
+        self.pwd=None
+        self.name=None
+        self.setdetails()
+    def setdetails(self):
+        self.id=str(input())
+        self.pwd=str(input())
+        self.name=str(input())
+    def getdetails(self):
+        print(self.id)
+        print(self.pwd)
+        print(self.name)
+class broker:
+    def __init__(self):
+        self.id=None
+        self.pwd=None
+        self.name=None
+        self.income=0
+        self.setdetails()
+        
+    def addincome(self,a):
+        self.income+=a
+    def setdetails(self):
+        self.id=str(input())
+        self.pwd=str(input())
+        self.name=str(input())
+        self.income=0
+    def getdetails(self):
+        print(self.id)
+        print(self.pwd)
+        print(self.name)
+        print(self.income)
+class admin:
+    def __init__(self):
+        self.id=None
+        self.pwd=None
+        self.name=None
+        self.income=0
+        self.setdetails()
+        print(2)
+        
+    def addincome(self,a):
+        self.income+=a
+    def setdetails(self):
+        print(2)
+        self.id=str(input())
+        self.pwd=str(input())
+        self.name=str(input())
+        self.income=0
+    def getdetails(self):
+        print(self.id)
+        print(self.pwd)
+        print(self.name)
+        print(self.income)
+class registration:
+    def __init__(self):
+        self.rid=str(input())
+        print("Enter seller login id ")
+        self.sel=str(input())
+        print("Enter buyer login id ")
+        self.buy=str(input())
+        print("Enter broker login id ")
+        self.bro=str(input())
+        self.status=False
+        self.verify()
+    def verify(self):
+        flag=0
+        for i in sellerlst:
+            if i.id==self.sel:
+                flag=1 
+                break
+        if flag==0:
+            print("invalid seller login id")
+        else: 
+            flag=0
+            for i in buyerlst:
+                if i.id==self.buy:
+                    flag=1 
+                    break
+            if(flag==0):
+                print("invalid seller login id")
+            else:
+                flag=0
+                for i in brokerlst:
+                    if(i.id==self.bro):
+                        flag=1 
+                        break
+                if(flag==0):
+                    print("invalid broker login id")
+                else:
+                    self.status=True
+    def getstatus(self):
+        if(self.status):
+            print("Registration is succesfull")
+        else:
+            print("Registration is pending")
+            print("to continue with registration press 1")
+            a=int(input())
+            if a==1:
+                print("Enter seller login id ")
+                self.sel=str(input())
+                print("Enter buyer login id ")
+                self.buy=str(input())
+                print("Enter broker login id ")
+                self.bro=str(input())
+                self.verify()
+class payment:
+    def __init__(self):
+        self.pid=str(input())
+        print("Enter seller login id ")
+        self.sel=str(input())
+        print("Enter admin login id ")
+        self.adm=str(input())
+        print("Enter broker login id ")
+        self.bro=str(input())
+        self.status=False
+        self.verify()
+    def verify(self):
+        flag=0
+        for i in sellerlst:
+            if i.id==self.sel:
+                flag=1 
+                break
+        if flag==0:
+            print("invalid seller login id")
+        else: 
+            flag=0
+            for i in adminlst:
+                if i.id==self.adm:
+                    flag=1 
+                    break
+            if(flag==0):
+                print("invalid admin login id")
+            else:
+                flag=0
+                for i in brokerlst:
+                    if(i.id==self.bro):
+                        flag=1 
+                        break
+                if(flag==0):
+                    print("invalid broker login id")
+                else:
+                    self.status=True
+    def getstatus(self):
+        if(self.status):
+            print("Payment is succesfull")
+        else:
+            print("Payment is pending")
+            print("to continue with payment press 1")
+            a=int(input())
+            if a==1:
+                print("Enter seller login id ")
+                self.sel=str(input())
+                print("Enter admin login id ")
+                self.adm=str(input())
+                print("Enter broker login id ")
+                self.bro=str(input())
+                self.verify()
+                    
+        
+ 
+print("Enter choice")
+choice=int(input())
+while choice!=0:
+    if choice==1:
+        print(2)
+        s1=seller()
+        print(3)
+        sellerlst.append(s1)
+    elif choice==2:
+        b1=buyer()
+        buyerlst.append(b1)
+    elif choice==3:
+        br1=broker()
+        brokerlst.append(br1)
+    elif choice==4:
+        r1=registration()
+        reglst.append(r1)
+    elif choice==5:
+        p1=payment()
+        paylst.append(p1)
+    
+    elif choice==6:
+        print("enter your registration id to check registration is succesfull or not")
+        x=str(input())
+        flag=0
+        for i in reglst:
+            if(i.rid==x):
+                i.getstatus()
+                flag=1 
+                break
+        if flag==0:
+            print("The registration id you entered is invalid")
+    elif choice==7:
+        print("enter your paymenr id to check payment is succesfull or not")
+        x=str(input())
+        flag=0
+        for i in paylst:
+            if(i.pid==x):
+                i.getstatus()
+                flag=1 
+                break
+        if flag==0:
+            print("The payment id you entered is invalid")
+    elif choice==8:
+        a1=admin()
+        adminlst.append(a1)
+        
+    print("Enter choice")
+    choice=int(input())
+ 
